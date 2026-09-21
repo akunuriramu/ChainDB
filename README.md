@@ -1,29 +1,22 @@
-\# ChainDB
+# ChainDB
 
 
-
-\### Event-Sourced Database Engine with Blockchain Integrity
-
+### Event-Sourced Database Engine with Blockchain Integrity
 
 
-ChainDB is a lightweight, SQL-like database engine built from scratch using \*\*Core Java 17+\*\*. It combines \*\*event sourcing\*\* with a \*\*hash-linked blockchain\*\* to maintain an auditable history of database operations.
-
+ChainDB is a lightweight, SQL-like database engine built from scratch using **Core Java 17+**. It combines **event sourcing** with a **hash-linked blockchain** to maintain an auditable history of database operations.
 
 
 Instead of directly overwriting database records, ChainDB records database mutations such as `CREATE TABLE`, `INSERT`, `UPDATE`, and `DELETE` as events. Each event is stored inside a mined blockchain block and linked to the previous block using cryptographic hashes.
 
 
-
 When the application starts, the database state is reconstructed by replaying the historical events stored in the blockchain.
 
 
-
-\---
-
+---
 
 
-\## 🚀 Features
-
+## 🚀 Features
 
 
 \- SQL-like interactive console
@@ -73,13 +66,10 @@ When the application starts, the database state is reconstructed by replaying th
 \- Singleton, Factory, Command, and Repository design patterns
 
 
-
-\---
-
+---
 
 
-\## 🛠️ Technology Stack
-
+## 🛠️ Technology Stack
 
 
 | Technology | Usage |
@@ -99,117 +89,105 @@ When the application starts, the database state is reconstructed by replaying th
 | Java Collections Framework | Database and blockchain data structures |
 
 
-
-\*\*External dependencies:\*\* None
-
+**External dependencies:** None
 
 
 ChainDB is implemented using Core Java without Spring, Hibernate, JDBC, an external database, or a blockchain library.
 
 
-
-\---
-
-
-
-\# 🏗️ Architecture
-
+## Architecture
 
 
 ```text
 
-&#x20;                        ┌───────────────────────┐
+                         ┌───────────────────────┐
 
-&#x20;                        │       Console UI      │
+                         │       Console UI      │
 
-&#x20;                        │       ConsoleUI       │
+                         │       ConsoleUI       │
 
-&#x20;                        └───────────┬───────────┘
+                         └───────────┬───────────┘
 
-&#x20;                                    │
+                                     │
 
-&#x20;                                    ▼
+                                     ▼
 
-&#x20;                        ┌───────────────────────┐
+                         ┌───────────────────────┐
 
-&#x20;                        │      SQL Parser       │
+                         │      SQL Parser       │
 
-&#x20;                        │      SqlParser        │
+                         │      SqlParser        │
 
-&#x20;                        └───────────┬───────────┘
+                         └───────────┬───────────┘
 
-&#x20;                                    │
+                                     │
 
-&#x20;                                    ▼
+                                     ▼
 
-&#x20;                        ┌───────────────────────┐
+                         ┌───────────────────────┐
 
-&#x20;                        │    Query Executor     │
+                         │    Query Executor     │
 
-&#x20;                        │    Command Handler    │
+                         │    Command Handler    │
 
-&#x20;                        └───────────┬───────────┘
+                         └───────────┬───────────┘
 
-&#x20;                                    │
+                                     │
 
-&#x20;                                    ▼
+                                     ▼
 
-&#x20;                        ┌───────────────────────┐
+                         ┌───────────────────────┐
 
-&#x20;                        │    Event Factory      │
+                         │    Event Factory      │
 
-&#x20;                        │    Database Events    │
+                         │    Database Events    │
 
-&#x20;                        └───────────┬───────────┘
+                         └───────────┬───────────┘
 
-&#x20;                                    │
+                                     │
 
-&#x20;                   ┌────────────────┴────────────────┐
+                    ┌────────────────┴────────────────┐
 
-&#x20;                   ▼                                 ▼
+                    ▼                                 ▼
 
-&#x20;         ┌──────────────────┐              ┌──────────────────┐
+          ┌──────────────────┐              ┌──────────────────┐
 
-&#x20;         │   In-Memory DB   │              │    Blockchain    │
+          │   In-Memory DB   │              │    Blockchain    │
 
-&#x20;         │ Database         │              │ Block/Blockchain │
+          │ Database         │              │ Block/Blockchain │
 
-&#x20;         │ Table            │              │ SHA-256 + PoW    │
+          │ Table            │              │ SHA-256 + PoW    │
 
-&#x20;         │ Row / Column     │              │ Integrity Check  │
+          │ Row / Column     │              │ Integrity Check  │
 
-&#x20;         └──────────────────┘              └────────┬─────────┘
+          └──────────────────┘              └────────┬─────────┘
 
-&#x20;                                                    │
+                                                     │
 
-&#x20;                                                    ▼
+                                                     ▼
 
-&#x20;                                          ┌──────────────────┐
+                                           ┌──────────────────┐
 
-&#x20;                                          │    Repository    │
+                                           │    Repository    │
 
-&#x20;                                          │ FileBlockchain   │
+                                           │ FileBlockchain   │
 
-&#x20;                                          │ Repository       │
+                                           │ Repository       │
 
-&#x20;                                          └────────┬─────────┘
+                                           └────────┬─────────┘
 
-&#x20;                                                   │
+                                                    │
 
-&#x20;                                                   ▼
+                                                    ▼
 
-&#x20;                                          ┌──────────────────┐
+                                           ┌──────────────────┐
 
-&#x20;                                          │  blockchain.dat  │
+                                           │  blockchain.dat  │
 
-&#x20;                                          └──────────────────┘
-
-
+                                           └──────────────────┘
 
 
-
-🔄 How ChainDB Works
-
+## How ChainDB Works
 
 
 For example, when a user executes:
@@ -217,179 +195,164 @@ For example, when a user executes:
 INSERT INTO Student VALUES (101, 'Ramu', 8.75);
 
 
-
 the command follows this flow:
-
 
 
 User Command
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 ConsoleUI
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 SqlParser
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 ParsedCommand
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 QueryExecutor
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 EventFactory
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 InsertEvent
 
-&#x20;    │
+     │
 
-&#x20;    ├──────────────► Update In-Memory Database
+     ├──────────────► Update In-Memory Database
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 DatabaseEngine
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 Create Blockchain Block
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 SHA-256 Hash + Proof of Work
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 Append Block to Blockchain
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 Persist Blockchain
 
-&#x20;    │
+     │
 
-&#x20;    ▼
+     ▼
 
 blockchain.dat
 
 
-
-
-
-
-
-⛓️ Event Sourcing + Blockchain
-
+## Event Sourcing + Blockchain
 
 
 ChainDB records database mutations as events rather than directly storing only the latest state.
 
 
-
 CREATE TABLE
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 CreateTableEvent
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
-&#x20;  Block #1
+   Block #1
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
-&#x20;  Hash #1
+   Hash #1
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 INSERT
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 InsertEvent
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
-&#x20;  Block #2
+   Block #2
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
-&#x20;  Hash #2
+   Hash #2
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 UPDATE
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 UpdateEvent
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
-&#x20;  Block #3
-
+   Block #3
 
 
 Each block stores the hash of the previous block, creating a linked chain of historical database operations.
 
 
-
 When ChainDB starts, it replays the stored events in order to reconstruct the current database state.
 
 
-
-
-
-🔐 Blockchain Integrity Verification
-
+## Blockchain Integrity Verification
 
 
 ChainDB provides:
@@ -397,13 +360,10 @@ ChainDB provides:
 VERIFYCHAIN
 
 
-
 to verify the integrity of the blockchain.
 
 
-
 The verification process checks the stored hashes and the relationships between blocks.
-
 
 
 Example:
@@ -411,71 +371,58 @@ Example:
 ChainDB > VERIFYCHAIN
 
 
-
 Blockchain integrity check: VALID.
 
 All blocks verified successfully.
 
 
-
 If historical blockchain data is modified, the recalculated hash can differ from the stored hash, allowing ChainDB to detect the modification.
 
 
-
-🔎 Blockchain Explorer
-
+## Blockchain Explorer
 
 
 ChainDB includes an interactive blockchain explorer:
 
 
-
 ChainDB > EXPLORER
-
 
 
 Example execution:
 
 
+--- Blockchain Explorer ---
 
-\--- Blockchain Explorer ---
+#0 GENESIS
 
-\#0 GENESIS
+#1 CREATE_TABLE Student
 
-\#1 CREATE\_TABLE Student
+#2 CREATE_TABLE Employee
 
-\#2 CREATE\_TABLE Employee
+#3 INSERT Employee
 
-\#3 INSERT Employee
+#4 INSERT Employee
 
-\#4 INSERT Employee
+#5 INSERT Employee
 
-\#5 INSERT Employee
+#6 UPDATE Employee
 
-\#6 UPDATE Employee
-
-\#7 DELETE Employee
-
+#7 DELETE Employee
 
 
 The explorer allows users to inspect the blockchain and search or inspect events.
 
 
-
-📊 Database Reports
-
+## Database Reports
 
 
 The REPORT command provides information about the database and blockchain.
 
 
-
 Example from a verified ChainDB execution:
 
 
-
 ========== ChainDB Report ==========
-
 
 
 Total Tables:            2
@@ -484,7 +431,7 @@ Total Rows:              2
 
 Total Blocks:            8
 
-Total CREATE\_TABLE ops:  2
+Total CREATE_TABLE ops:  2
 
 Total INSERT operations: 3
 
@@ -495,86 +442,72 @@ Total DELETE operations: 1
 Blockchain Valid:        YES
 
 
-
 =====================================
 
-📦 JSON Export
-
+## JSON Export
 
 
 The complete blockchain can be exported using:
 
 
-
 EXPORT JSON
-
 
 
 Example:
 
 
-
 ChainDB > EXPORT JSON
 
 
-
-Blockchain exported to blockchain\_export.json
-
+Blockchain exported to blockchain_export.json
 
 
 A sample blockchain export is included in the repository.
 
 
-
-💾 Persistence
-
+## Persistence
 
 
 ChainDB uses a file-based repository for blockchain persistence.
 
 
-
 FileBlockchainRepository
 
-&#x20;         │
+          │
 
-&#x20;         ▼
+          ▼
 
-&#x20;   blockchain.dat
-
+    blockchain.dat
 
 
 When ChainDB starts:
 
 
-
 blockchain.dat
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 Load Blockchain
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 Replay Events
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 Reconstruct Database
-
 
 
 This allows database state and historical events to persist across application restarts.
 
 
-
-🧩 Design Patterns
+## Design Patterns
 
 Pattern	Implementation	Purpose
 
@@ -586,7 +519,7 @@ Command	QueryExecutor / CommandHandler	Dispatches commands to handlers
 
 Repository	BlockchainRepository / FileBlockchainRepository	Separates persistence from application logic
 
-📁 Project Structure
+## Project Structure
 
 ChainDB/
 
@@ -594,127 +527,127 @@ ChainDB/
 
 ├── README.md
 
-├── sample\_blockchain\_export.json
+├── sample_blockchain_export.json
 
-├── sample\_execution.txt
+├── sample_execution.txt
 
 │
 
 └── src/
 
-&#x20;   └── chaindb/
+    └── chaindb/
 
-&#x20;       │
+        │
 
-&#x20;       ├── blockchain/
+        ├── blockchain/
 
-&#x20;       │   ├── Block.java
+        │   ├── Block.java
 
-&#x20;       │   └── Blockchain.java
+        │   └── Blockchain.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── engine/
+        ├── engine/
 
-&#x20;       │   ├── CommandHandler.java
+        │   ├── CommandHandler.java
 
-&#x20;       │   ├── DatabaseEngine.java
+        │   ├── DatabaseEngine.java
 
-&#x20;       │   ├── QueryExecutor.java
+        │   ├── QueryExecutor.java
 
-&#x20;       │   └── QueryResult.java
+        │   └── QueryResult.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── event/
+        ├── event/
 
-&#x20;       │   ├── DatabaseEvent.java
+        │   ├── DatabaseEvent.java
 
-&#x20;       │   ├── CreateTableEvent.java
+        │   ├── CreateTableEvent.java
 
-&#x20;       │   ├── InsertEvent.java
+        │   ├── InsertEvent.java
 
-&#x20;       │   ├── UpdateEvent.java
+        │   ├── UpdateEvent.java
 
-&#x20;       │   ├── DeleteEvent.java
+        │   ├── DeleteEvent.java
 
-&#x20;       │   └── EventFactory.java
+        │   └── EventFactory.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── exception/
+        ├── exception/
 
-&#x20;       │   ├── BlockchainException.java
+        │   ├── BlockchainException.java
 
-&#x20;       │   ├── ColumnNotFoundException.java
+        │   ├── ColumnNotFoundException.java
 
-&#x20;       │   ├── InvalidQueryException.java
+        │   ├── InvalidQueryException.java
 
-&#x20;       │   └── TableNotFoundException.java
+        │   └── TableNotFoundException.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── model/
+        ├── model/
 
-&#x20;       │   ├── Database.java
+        │   ├── Database.java
 
-&#x20;       │   ├── Table.java
+        │   ├── Table.java
 
-&#x20;       │   ├── Column.java
+        │   ├── Column.java
 
-&#x20;       │   ├── Row.java
+        │   ├── Row.java
 
-&#x20;       │   └── DataType.java
+        │   └── DataType.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── parser/
+        ├── parser/
 
-&#x20;       │   ├── SqlParser.java
+        │   ├── SqlParser.java
 
-&#x20;       │   ├── ParsedCommand.java
+        │   ├── ParsedCommand.java
 
-&#x20;       │   └── CommandType.java
+        │   └── CommandType.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── service/
+        ├── service/
 
-&#x20;       │   ├── ExplorerService.java
+        │   ├── ExplorerService.java
 
-&#x20;       │   ├── JsonExportService.java
+        │   ├── JsonExportService.java
 
-&#x20;       │   ├── ReportService.java
+        │   ├── ReportService.java
 
-&#x20;       │   └── UndoService.java
+        │   └── UndoService.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── storage/
+        ├── storage/
 
-&#x20;       │   ├── BlockchainRepository.java
+        │   ├── BlockchainRepository.java
 
-&#x20;       │   └── FileBlockchainRepository.java
+        │   └── FileBlockchainRepository.java
 
-&#x20;       │
+        │
 
-&#x20;       ├── ui/
+        ├── ui/
 
-&#x20;       │   ├── ConsoleUI.java
+        │   ├── ConsoleUI.java
 
-&#x20;       │   └── Main.java
+        │   └── Main.java
 
-&#x20;       │
+        │
 
-&#x20;       └── util/
+        └── util/
 
-&#x20;           ├── ConsoleTablePrinter.java
+            ├── ConsoleTablePrinter.java
 
-&#x20;           ├── HashUtil.java
+            ├── HashUtil.java
 
-&#x20;           └── ValueParser.java
+            └── ValueParser.java
 
-▶️ Running ChainDB
+## Running ChainDB
 
 Requirements
 
@@ -725,9 +658,7 @@ Git (optional)
 No external libraries required
 
 
-
 Check your Java installation:
-
 
 
 java -version
@@ -737,93 +668,75 @@ javac -version
 Windows PowerShell
 
 
-
 Open PowerShell inside the ChainDB directory.
-
 
 
 1\. Compile the project
 
 mkdir out
 
-javac -d out (Get-ChildItem -Recurse -Filter \*.java src).FullName
+javac -d out (Get-ChildItem -Recurse -Filter *.java src).FullName
 
 2\. Run ChainDB
 
 java -cp out chaindb.ui.Main
 
 
-
 You should see:
 
 
-
 =====================================================
 
-&#x20; ChainDB - Event-Sourced Database Engine
+  ChainDB - Event-Sourced Database Engine
 
-&#x20; with Blockchain Integrity Verification
+  with Blockchain Integrity Verification
 
 =====================================================
-
 
 
 Type HELP for a list of commands.
 
 
-
 ChainDB >
 
-💻 Example Usage
+## Example Usage
 
 CREATE TABLE Student (id INT, name STRING, cgpa DOUBLE);
-
 
 
 INSERT INTO Student VALUES (101, 'Ramu', 8.75);
 
 
-
 INSERT INTO Student VALUES (102, 'Priya', 8.90);
 
 
-
-SELECT \* FROM Student;
-
+SELECT * FROM Student;
 
 
 UPDATE Student SET cgpa = 9.10 WHERE id = 101;
 
 
-
-SELECT \* FROM Student;
-
+SELECT * FROM Student;
 
 
 DELETE FROM Student WHERE id = 102;
 
 
-
 VERIFYCHAIN
-
 
 
 REPORT
 
 
-
 EXPLORER
-
 
 
 EXPORT JSON
 
-🧪 Verified Execution
-
+## Verified Execution
 
 
 The current implementation has been successfully tested through the interactive console with:
-
 
 
 CREATE TABLE
@@ -845,9 +758,7 @@ REPORT
 EXPORT JSON
 
 
-
 A verified execution produced:
-
 
 
 Total Tables:            2
@@ -859,33 +770,29 @@ Total Blocks:            8
 Blockchain Valid:        YES
 
 
-
 The blockchain explorer showed:
 
 
+#0 GENESIS
 
-\#0 GENESIS
+#1 CREATE_TABLE Student
 
-\#1 CREATE\_TABLE Student
+#2 CREATE_TABLE Employee
 
-\#2 CREATE\_TABLE Employee
+#3 INSERT Employee
 
-\#3 INSERT Employee
+#4 INSERT Employee
 
-\#4 INSERT Employee
+#5 INSERT Employee
 
-\#5 INSERT Employee
+#6 UPDATE Employee
 
-\#6 UPDATE Employee
+#7 DELETE Employee
 
-\#7 DELETE Employee
-
-🎯 Learning Outcomes
-
+## Learning Outcomes
 
 
 This project demonstrates practical experience with:
-
 
 
 Core Java
@@ -916,12 +823,10 @@ Design Patterns
 
 Software architecture
 
-🔮 Future Improvements
-
+## Future Improvements
 
 
 Possible future improvements include:
-
 
 
 Database snapshots for faster startup
@@ -940,43 +845,13 @@ Expanded query support
 
 Automated unit and integration tests
 
-👨‍💻 Author
-
+## Author
 
 
 Ramu Akunuri
 
 
-
 B.Tech Information Technology
 
 
-
 GitHub: akunuriramu
-
-
-
-📄 License
-
-
-
-This project is currently intended for educational and portfolio purposes.
-
-
-
-
-
-\*\*After pasting:\*\* `Ctrl + S` → close Notepad.
-
-
-
-Then run only:
-
-
-
-```powershell
-
-git status
-
-
-
