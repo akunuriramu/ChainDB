@@ -1,0 +1,60 @@
+=====================================================
+  ChainDB - Event-Sourced Database Engine
+  with Blockchain Integrity Verification
+=====================================================
+Type HELP for a list of commands.
+Loaded existing blockchain with 0 event(s).
+
+ChainDB > Table 'Student' created.
+ChainDB > 1 row inserted into 'Student'.
+ChainDB > 1 row inserted into 'Student'.
+ChainDB > +-----+-------+------+
+| id  | name  | cgpa |
++-----+-------+------+
+| 101 | Alice | 8.4  |
+| 102 | Bob   | 7.9  |
++-----+-------+------+
+2 row(s) returned.
+ChainDB > Row(s) updated in 'Student'.
+ChainDB > +-----+-------+------+
+| id  | name  | cgpa |
++-----+-------+------+
+| 101 | Alice | 9.2  |
++-----+-------+------+
+1 row(s) returned.
+ChainDB > Tables:
+  - Student
+ChainDB > Table: Student
+  id : INT
+  name : STRING
+  cgpa : DOUBLE
+ChainDB > ========== ChainDB Report ==========
+Total Tables:            1
+Total Rows:               2
+Total Blocks:             5
+Total CREATE_TABLE ops:   1
+Total INSERT operations:  2
+Total UPDATE operations:  1
+Total DELETE operations:  0
+Blockchain Valid:         YES
+=====================================
+ChainDB > Blockchain integrity check: VALID. All 4 block(s) verified successfully.
+ChainDB > Row(s) deleted from 'Student'.
+ChainDB > Undo applied: compensating INSERT(s) for last DELETE on 'Student'.
+ChainDB > --- Blockchain Explorer ---
+#0 GENESIS | hash=0000f8e31df4...
+#1 CREATE_TABLE Student -> columns=[id, name, cgpa] | hash=00000472cd82...
+#2 INSERT Student -> {id=101, name=Alice, cgpa=8.4} | hash=0000ce4151fc...
+#3 INSERT Student -> {id=102, name=Bob, cgpa=7.9} | hash=00004697f3ee...
+#4 UPDATE Student -> SET {cgpa=9.2} WHERE id=101 | hash=00004d98e42b...
+#5 DELETE Student -> WHERE id=102 (1 row(s)) | hash=000014f06539...
+#6 INSERT Student -> {id=102, name=Bob, cgpa=7.9} | hash=0000a37286bb...
+Enter a block number to inspect, 'search <keyword>', or press Enter to exit: Block #1
+  Timestamp     : Tue Jul 28 09:51:04 UTC 2026
+  Event         : CREATE_TABLE Student -> columns=[id, name, cgpa]
+  Previous Hash : 0000f8e31df43e60fc418ce72e1df000136c22686eca937f2b584e709ab6b6ed
+  Current Hash  : 00000472cd8240e5525fe8640d0d8ce546bbdf969bcc1b3811a5b2a73c588a65
+  Nonce         : 25989
+ChainDB > Blockchain exported to blockchain_export.json
+ChainDB > Persisting blockchain and shutting down...
+Goodbye!

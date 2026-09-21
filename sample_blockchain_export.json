@@ -1,0 +1,60 @@
+{
+  "chain": [
+    {
+      "blockNumber": 0,
+      "timestamp": 1785232264037,
+      "previousHash": "0",
+      "currentHash": "0000f8e31df43e60fc418ce72e1df000136c22686eca937f2b584e709ab6b6ed",
+      "nonce": 2586,
+      "event": null
+    },
+    {
+      "blockNumber": 1,
+      "timestamp": 1785232264309,
+      "previousHash": "0000f8e31df43e60fc418ce72e1df000136c22686eca937f2b584e709ab6b6ed",
+      "currentHash": "00000472cd8240e5525fe8640d0d8ce546bbdf969bcc1b3811a5b2a73c588a65",
+      "nonce": 25989,
+      "event": "CREATE_TABLE Student -> columns=[id, name, cgpa]"
+    },
+    {
+      "blockNumber": 2,
+      "timestamp": 1785232264793,
+      "previousHash": "00000472cd8240e5525fe8640d0d8ce546bbdf969bcc1b3811a5b2a73c588a65",
+      "currentHash": "0000ce4151fc14c1dcfe0582a0f7dcf262db612a4b155717aed759871439b45e",
+      "nonce": 115172,
+      "event": "INSERT Student -> {id=101, name=Alice, cgpa=8.4}"
+    },
+    {
+      "blockNumber": 3,
+      "timestamp": 1785232265463,
+      "previousHash": "0000ce4151fc14c1dcfe0582a0f7dcf262db612a4b155717aed759871439b45e",
+      "currentHash": "00004697f3ee636e65afe0b2c69fa085cfad29300f00634c3539b954e3d6c433",
+      "nonce": 116602,
+      "event": "INSERT Student -> {id=102, name=Bob, cgpa=7.9}"
+    },
+    {
+      "blockNumber": 4,
+      "timestamp": 1785232265711,
+      "previousHash": "00004697f3ee636e65afe0b2c69fa085cfad29300f00634c3539b954e3d6c433",
+      "currentHash": "00004d98e42baab9cb740c76063782ee3b98f25bf6225428468dd803ff99791b",
+      "nonce": 18758,
+      "event": "UPDATE Student -> SET {cgpa=9.2} WHERE id=101"
+    },
+    {
+      "blockNumber": 5,
+      "timestamp": 1785232265853,
+      "previousHash": "00004d98e42baab9cb740c76063782ee3b98f25bf6225428468dd803ff99791b",
+      "currentHash": "000014f0653906c870a89c959dab54d647d9fbf6ec019ad09db2cd867c2aa971",
+      "nonce": 14942,
+      "event": "DELETE Student -> WHERE id=102 (1 row(s))"
+    },
+    {
+      "blockNumber": 6,
+      "timestamp": 1785232265943,
+      "previousHash": "000014f0653906c870a89c959dab54d647d9fbf6ec019ad09db2cd867c2aa971",
+      "currentHash": "0000a37286bba35f78fca753256f45a4e34274aaa6041351ed2319fd4bc9dead",
+      "nonce": 4979,
+      "event": "INSERT Student -> {id=102, name=Bob, cgpa=7.9}"
+    }
+  ]
+}

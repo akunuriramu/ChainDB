@@ -1,0 +1,18 @@
+# Compiled Java files
+out/
+*.class
+
+# ChainDB runtime data
+blockchain.dat
+
+# Generated exports
+blockchain_export.json
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
